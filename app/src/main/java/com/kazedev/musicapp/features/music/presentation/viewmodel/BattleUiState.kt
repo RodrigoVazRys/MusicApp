@@ -2,10 +2,25 @@ package com.kazedev.musicapp.features.music.presentation.viewmodel
 
 import com.kazedev.musicapp.features.music.domain.entity.Song
 
-// Definimos los estados aquí para que BattleViewModel los consuma
 sealed class BattleUiState {
-    object SelectingGenre : BattleUiState() // 1. Eligiendo género
-    object Loading : BattleUiState()        // 2. Cargando
-    data class BattleReady(val songA: Song, val songB: Song) : BattleUiState() // 3. Vs
-    data class Error(val msg: String) : BattleUiState() // 4. Error
+    data class SelectingMode(
+        val searchQuery: String = "",
+        val searchResults: List<Song> = emptyList(),
+        val selectedFighterA: Song? = null,
+        val selectedFighterB: Song? = null
+    ) : BattleUiState()
+
+    object Loading : BattleUiState()
+
+    data class RandomBattle(val songA: Song, val songB: Song) : BattleUiState()
+
+    data class PartyBattle(
+        val songA: Song,
+        val songB: Song,
+        val votesA: Int = 0,
+        val votesB: Int = 0,
+        val isFinished: Boolean = false
+    ) : BattleUiState()
+
+    data class Error(val msg: String) : BattleUiState()
 }

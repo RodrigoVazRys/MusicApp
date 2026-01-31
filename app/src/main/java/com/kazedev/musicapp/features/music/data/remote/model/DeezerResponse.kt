@@ -16,4 +16,8 @@ data class TrackDto(
 )
 
 data class ArtistDto(val name: String)
-data class AlbumDto(@SerializedName("cover_medium") val coverUrl: String)
+data class AlbumDto(
+    val id: Long,
+    val title: String,
+    @SerializedName("cover_medium") val coverUrl: String
+)

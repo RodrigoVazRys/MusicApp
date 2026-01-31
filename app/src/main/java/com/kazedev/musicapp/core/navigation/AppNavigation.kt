@@ -21,7 +21,6 @@ import com.kazedev.musicapp.features.music.presentation.viewmodel.MusicViewModel
 fun AppNavigation(appContainer: AppContainer) {
     val navController = rememberNavController()
 
-    // Las pantallas que aparecerán en la barra de abajo
     val screens = listOf(
         AppScreens.Music,
         AppScreens.Battle
@@ -40,7 +39,6 @@ fun AppNavigation(appContainer: AppContainer) {
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
                             navController.navigate(screen.route) {
-                                // Esto evita que se acumulen pantallas infinitas al navegar
                                 popUpTo(navController.graph.findStartDestination().id) {
                                     saveState = true
                                 }
@@ -53,21 +51,21 @@ fun AppNavigation(appContainer: AppContainer) {
             }
         }
     ) { innerPadding ->
-        // Aquí ocurre el cambio de pantallas
         NavHost(
             navController = navController,
             startDestination = AppScreens.Music.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            // Pantalla 1: Buscador
             composable(AppScreens.Music.route) {
                 val musicFactory = MusicViewModelFactory(appContainer.searchTracksUseCase)
                 MusicScreen(factory = musicFactory)
             }
 
-            // Pantalla 2: Batalla (Vs)
             composable(AppScreens.Battle.route) {
-                val battleFactory = BattleViewModelFactory(appContainer.getBattleUseCase)
+                val battleFactory = BattleViewModelFactory(
+                    appContainer.getBattleUseCase,
+                    appContainer.searchTracksUseCase
+                )
                 BattleScreen(factory = battleFactory)
             }
         }
