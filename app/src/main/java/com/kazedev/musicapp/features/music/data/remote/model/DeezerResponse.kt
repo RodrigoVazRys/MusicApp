@@ -10,6 +10,7 @@ data class TrackDto(
     val id: Long,
     val title: String,
     val preview: String,
+    val link: String,
     val artist: ArtistDto,
     val album: AlbumDto
 )

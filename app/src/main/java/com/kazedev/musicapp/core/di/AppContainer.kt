@@ -28,7 +28,7 @@ class AppContainer(context: Context) {
         SearchTracksUseCase(musicRepository)
     }
 
-    val getBattleUseCase: GetBattleUseCase by lazy {
-        GetBattleUseCase(deezerApi)
+    val getBattleUseCase: com.kazedev.musicapp.features.music.domain.usecase.GetBattleUseCase by lazy {
+        com.kazedev.musicapp.features.music.domain.usecase.GetBattleUseCase(deezerApi)
     }
 }
