@@ -9,6 +9,7 @@ fun TrackDto.toDomain(): Song {
         title = this.title,
         artist = this.artist.name,
         coverUrl = this.album.coverUrl,
-        previewUrl = this.preview
+        previewUrl = this.preview,
+        externalUrl = this.link
     )
 }

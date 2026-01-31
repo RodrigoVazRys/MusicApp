@@ -4,6 +4,7 @@ import android.content.Context
 import com.kazedev.musicapp.core.network.DeezerApi
 import com.kazedev.musicapp.features.music.data.repository.MusicRepositoryImpl
 import com.kazedev.musicapp.features.music.domain.repository.MusicRepository
+import com.kazedev.musicapp.features.music.domain.usecase.GetBattleUseCase
 import com.kazedev.musicapp.features.music.domain.usecase.SearchTracksUseCase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,5 +26,9 @@ class AppContainer(context: Context) {
 
     val searchTracksUseCase: SearchTracksUseCase by lazy {
         SearchTracksUseCase(musicRepository)
+    }
+
+    val getBattleUseCase: com.kazedev.musicapp.features.music.domain.usecase.GetBattleUseCase by lazy {
+        com.kazedev.musicapp.features.music.domain.usecase.GetBattleUseCase(deezerApi)
     }
 }
